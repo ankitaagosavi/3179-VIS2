@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "config": {
+      "title": {
+        "fontSize": 16,  
+        "anchor": "middle", 
+        "offset": 17
+      },
+      "background": "WhiteSmoke",
+      "view": {"stroke": "transparent"},
+      "font": "Trebuchet MS"
+    },
+    "width": "container",
+    "height": 250,
+    "projection": {"type": "equalEarth"},
+    "title": "Safety Cars at Formula 1 Grands Prix in Europe",
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ankitaagosavi/3179random/main/ne_50m_europecontinent.json",
+          "format": {"type": "topojson", "feature": "ne_50m_europecontinent"}
+        },
+        "mark": {"type": "geoshape", "fill": "#d7f2fa", "stroke": "black"}
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ankitaagosavi/3179random/main/safety_cars_europe_data.csv"
+        },
+        "mark": {"type": "circle", "tooltip": {"content": "data"}, "size": 300},
+        "encoding": {
+          "longitude": {"field": "Longitude", "type": "quantitative"},
+          "latitude": {"field": "Latitude", "type": "quantitative"},
+          "color": {
+            "field": "NoSafetyCars",
+            "type": "quantitative",
+            "title": "Safety Cars",
+            "scale": {"scheme": "oranges"},
+            "legend": {
+              "orient": "none",
+              "legendX": 145,
+              "legendY": 250,
+              "direction": "horizontal",
+              "titleAnchor": "middle",
+              "values": [5, 10, 15, 20],
+              "gradientLength": 200
+            }
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "NoSafetyCars", "type": "quantitative", "title": "Number of Safety Cars", "format": ","}          
+          ]
+        }
+      }
+    ],
+    "view": {
+      "stroke": "transparent"
+    }
+  }

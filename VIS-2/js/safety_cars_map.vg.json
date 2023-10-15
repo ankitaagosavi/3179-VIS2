@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "title": {
+      "fontSize": 16,  
+      "anchor": "middle", 
+      "offset": -14
+    },
+    "background": "WhiteSmoke",
+    "view": {"stroke": "transparent"},
+    "font": "Trebuchet MS"
+  },
+  "width": "container",
+  "height": 300,
+  "projection": {"type": "equalEarth"},
+  "title": "Safety Cars at Formula 1 Grands Prix Worldwide",
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ankitaagosavi/3179week9/main/Week%209%20Homework/js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "mintcream", "stroke": "black"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ankitaagosavi/3179week9/main/Week%209%20Homework/js/WorldMapWithGraticules.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ankitaagosavi/3179random/main/SafetyCarsMapData_v6.csv"
+      },
+      "mark": {"type": "circle", "tooltip": {"content": "data"}, "size": 300},
+      "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "color": {
+          "field": "NoSafetyCars",
+          "type": "quantitative",
+          "title": "Safety Cars",
+          "scale": {"scheme": "oranges"},
+          "legend": {
+            "orient": "none",
+            "legendX": 150,
+            "legendY": 285,
+            "direction": "horizontal",
+            "titleAnchor": "middle",
+            "values": [5, 10, 15, 20, 25],
+            "gradientLength": 200
+          }
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "NoSafetyCars", "type": "quantitative", "title": "Number of Safety Cars", "format": ","}          
+        ]
+      }
+    }
+  ],
+  "view": {
+    "stroke": "transparent"
+  }
+}
